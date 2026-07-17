@@ -5,7 +5,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   stories: ['../src/lib/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
-  addons: ['storybook-dark-mode', 'chromatic-com/storybook'],
+  addons: ['storybook-dark-mode', '@chromatic-com/storybook'],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {
