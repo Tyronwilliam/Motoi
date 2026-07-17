@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import dts from 'vite-plugin-dts';
 import * as path from 'path';
 export default defineConfig(() => ({
@@ -7,6 +8,7 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/packages/kata',
   plugins: [
     react(),
+    tailwindcss(),
     dts({
       entryRoot: 'src',
       tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json'),
