@@ -1,5 +1,9 @@
 # Motoi
 
+[![CI](https://github.com/Tyronwilliam/Motoi/actions/workflows/ci.yml/badge.svg)](https://github.com/Tyronwilliam/Motoi/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@motoi/kata.svg)](https://www.npmjs.com/package/@motoi/kata)
+[![license](https://img.shields.io/npm/l/@motoi/kata.svg)](./LICENSE)
+
 ## `@motoi/kata` — Design system
 
 `packages/kata` is the Motoi design system.
@@ -29,3 +33,4 @@ import { MotoiKata } from '@motoi/kata';
 ```
 
 `react` and `react-dom` (^19.0.0) are declared as `peerDependencies` — the consuming app must already have them installed.
+
