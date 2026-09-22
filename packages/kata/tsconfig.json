@@ -1,4 +1,10 @@
 {
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@staging/*": ["./ui/*"]
+    }
+  },
   "files": [],
   "include": [],
   "references": [

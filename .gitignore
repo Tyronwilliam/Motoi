@@ -49,3 +49,7 @@ vitest.config.*.timestamp*
 
 storybook-static
 CLAUDE.md
+
+# shadcn CLI staging area (packages/kata) — copy into src/components/ then clear
+packages/kata/ui/*
+!packages/kata/ui/README.md
