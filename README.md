@@ -2,28 +2,25 @@
 
 ## `@motoi/kata` — Design system
 
-`packages/kata` est le design system Motoi.
+`packages/kata` is the Motoi design system.
 
-### Publier une nouvelle version
+### Releasing a new version
 
-```sh
-npm login
-bunx nx release
-```
+Versioning, changelog and npm publishing are handled by **release-please**, automated in CI (`.github/workflows/release-please.yml`):
 
-`nx release` bump la version, génère le changelog, build la lib (`dist/`) et publie sur npm en une seule commande.
+1. Every commit on `main` following the [Conventional Commits](https://www.conventionalcommits.org/) convention (`feat(kata): ...`, `fix(kata): ...`) is analyzed.
+2. release-please keeps a **release PR** up to date (version bump + `CHANGELOG.md`).
+3. Merging that PR automatically triggers: Git tag, GitHub Release, build (`nx build kata`) and `npm publish`.
 
-Pour vérifier ce qui va se passer sans rien publier :
+Nothing to do manually — no `npm login`, no command to run locally.
 
-```sh
-bunx nx release --dry-run
-```
+**Current versioning phase** (`release-please-config.json`): while `@motoi/kata` is in `0.0.x`, both `feat` and `fix` only bump the patch (`Z`), and a breaking change stays on `0.x` (no accidental jump to `1.0.0`). These rules will be relaxed progressively (`feat` → minor, then a manual move to `1.0.0`) as the design system stabilizes.
 
-### Utiliser `@motoi/kata` dans l'autre app
+### Using `@motoi/kata` in another app
 
 ```sh
 npm install @motoi/kata
-# ou
+# or
 bun add @motoi/kata
 ```
 
@@ -31,14 +28,4 @@ bun add @motoi/kata
 import { MotoiKata } from '@motoi/kata';
 ```
 
-`react` et `react-dom` (^19.0.0) sont déclarés en `peerDependencies` — l'app consommatrice doit déjà les avoir installés.
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
+`react` and `react-dom` (^19.0.0) are declared as `peerDependencies` — the consuming app must already have them installed.
