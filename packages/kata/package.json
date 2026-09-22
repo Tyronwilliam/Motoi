@@ -1,7 +1,20 @@
 {
   "name": "@motoi/kata",
   "version": "0.0.1",
+  "description": "Motoi design system — React component library.",
   "type": "module",
+  "license": "MIT",
+  "author": "Tyron - William Chanu",
+  "homepage": "https://github.com/Tyronwilliam/Motoi/tree/main/packages/kata#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tyronwilliam/Motoi.git",
+    "directory": "packages/kata"
+  },
+  "bugs": {
+    "url": "https://github.com/Tyronwilliam/Motoi/issues"
+  },
+  "keywords": ["design-system", "react", "components", "ui"],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
