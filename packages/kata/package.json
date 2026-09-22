@@ -11,10 +11,19 @@
     "url": "git+https://github.com/Tyronwilliam/Motoi.git",
     "directory": "packages/kata"
   },
+  "scripts": {
+    "dev": "nx storybook kata",
+    "ui:add": "bunx --bun shadcn@latest add"
+  },
   "bugs": {
     "url": "https://github.com/Tyronwilliam/Motoi/issues"
   },
-  "keywords": ["design-system", "react", "components", "ui"],
+  "keywords": [
+    "design-system",
+    "react",
+    "components",
+    "ui"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -37,10 +46,16 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.4.0",
+    "radix-ui": "^1.6.7",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
+    "@nx/storybook": "23.1.0",
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-themes": "^10.6.0",
     "storybook-dark-mode": "^5.0.0"
   }
 }

@@ -4,8 +4,13 @@ import { dirname } from 'node:path';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  stories: ['../src/lib/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
-  addons: ['storybook-dark-mode', '@chromatic-com/storybook'],
+  stories: ['../src/components/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
+  addons: [
+    'storybook-dark-mode',
+    '@chromatic-com/storybook',
+    '@storybook/addon-themes',
+    '@storybook/addon-a11y',
+  ],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {
@@ -16,7 +21,7 @@ const config: StorybookConfig = {
   },
 };
 
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value: string): string {
   return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
 }
 
