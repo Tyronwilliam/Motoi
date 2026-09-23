@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,5 +20,47 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      - name: Lint, test, typecheck, build (affected projects)
-        run: bunx nx affected -t lint test typecheck build --base=origin/main --head=HEAD
+      - name: Lint (affected projects)
+        run: bunx nx affected -t lint --base=origin/main --head=HEAD
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - name: Typecheck (affected projects)
+        run: bunx nx affected -t typecheck --base=origin/main --head=HEAD
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - name: Test (affected projects)
+        run: bunx nx affected -t test --base=origin/main --head=HEAD
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - name: Build (affected projects)
+        run: bunx nx affected -t build --base=origin/main --head=HEAD
