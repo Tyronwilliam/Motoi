@@ -1,1 +1,1 @@
-export * from './lib/kata';
+export * from './components/actions/buttons/ButtonPrimitive';
