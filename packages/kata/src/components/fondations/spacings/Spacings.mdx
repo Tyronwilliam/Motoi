@@ -1,0 +1,68 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as SpacingStories from './Spacings.stories';
+
+<Meta of={SpacingStories} />
+
+# Spacing
+
+The spacing scale defines the allowed `padding`, `margin`, and `gap` values
+across the design system: multiples of 2, from 0 to 16. Spacing values must
+be declared through this scale rather than introduced ad hoc per component
+(`p-3`, `m-5`, `gap-7`, ...), so every component shares the same visual
+rhythm.
+
+The scale is defined once in `src/lib/spacing.ts`:
+
+```ts
+export const SPACING_SCALE = [0, 2, 4, 6, 8, 10, 12, 14, 16] as const;
+```
+
+Components exposing spacing props (`Flex`, `Stack`, `Box`, ...) must type
+those props with `SpacingScale` instead of a free `number`, so out-of-scale
+values are rejected at compile time.
+
+## Padding
+
+`PADDING` exposes the Tailwind classes for each scale value, across every
+axis (`all`, `x`, `y`, `top`, `right`, `bottom`, `left`).
+
+```ts
+import { PADDING } from '@/lib/spacing';
+
+PADDING.all[4]; // "p-4"
+PADDING.x[8]; // "px-8"
+```
+
+<Canvas of={SpacingStories.Padding} />
+
+## Margin
+
+Same principle for `MARGIN`, with the same axes as `PADDING`.
+
+```ts
+import { MARGIN } from '@/lib/spacing';
+
+MARGIN.all[4]; // "m-4"
+MARGIN.top[8]; // "mt-8"
+```
+
+<Canvas of={SpacingStories.Margin} />
+
+## Gap
+
+`GAP` follows the same scale for flex/grid containers (`all`, `x`, `y`).
+
+```ts
+import { GAP } from '@/lib/spacing';
+
+GAP.all[4]; // "gap-4"
+```
+
+## Why these classes aren't detected automatically by Tailwind
+
+Spacing classes are built dynamically (`` `${prefix}-${step}` ``) instead of
+being written out as literals, so Tailwind's scanner can't detect them in
+source code. New spacing values must be declared in both `SPACING_SCALE` and
+the `@source inline(...)` directive in `styles.css`, which lists every valid
+prefix/value combination — otherwise the generated CSS is missing and the
+class has no effect at runtime.
