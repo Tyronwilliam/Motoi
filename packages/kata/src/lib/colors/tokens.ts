@@ -1,4 +1,4 @@
-import { recordFromKeys } from '../record';
+import { recordFromKeys } from '../utils/record';
 
 export const COLOR_TOKENS = [
   'primary',

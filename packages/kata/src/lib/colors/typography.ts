@@ -1,4 +1,4 @@
-import { recordFromKeys } from '../record';
+import { recordFromKeys } from '../utils/record';
 import { COLOR_TOKENS, tokenMap, type ColorToken } from './tokens';
 
 export const TEXT = tokenMap('text');
