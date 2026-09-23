@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
 @source inline("{p,px,py,pt,pr,pb,pl,m,mx,my,mt,mr,mb,ml,gap,gap-x,gap-y}-{0,2,4,6,8,10,12,14,16}");
+@source inline("{bg,text,border,ring}-{primary,secondary,muted,accent,destructive,success,warning,info}");
+@source inline("text-{primary,secondary,muted,accent,destructive,success,warning,info}-foreground");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -21,6 +23,12 @@
   --accent-foreground: oklch(0.3791 0.1378 265.5222);
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.7227 0.192 149.5793);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.7952 0.1617 70.0851);
+  --warning-foreground: oklch(0.2803 0.0243 87.8994);
+  --info: oklch(0.6853 0.1489 237.3233);
+  --info-foreground: oklch(1 0 0);
   --border: oklch(0.9276 0.0058 264.5313);
   --input: oklch(0.9276 0.0058 264.5313);
   --ring: oklch(0.6231 0.188 259.8145);
@@ -80,6 +88,12 @@
   --accent-foreground: oklch(0.8823 0.0571 254.1284);
   --destructive: oklch(0.6368 0.2078 25.3313);
   --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.7227 0.192 149.5793);
+  --success-foreground: oklch(0.2029 0.0524 155.2967);
+  --warning: oklch(0.7952 0.1617 70.0851);
+  --warning-foreground: oklch(0.2803 0.0243 87.8994);
+  --info: oklch(0.6853 0.1489 237.3233);
+  --info-foreground: oklch(0.2029 0.0524 237.3233);
   --border: oklch(0.3715 0 0);
   --input: oklch(0.3715 0 0);
   --ring: oklch(0.6231 0.188 259.8145);
@@ -137,6 +151,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

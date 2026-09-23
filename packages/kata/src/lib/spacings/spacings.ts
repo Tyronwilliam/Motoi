@@ -1,11 +1,14 @@
+import { recordFromKeys } from '../utils';
+
 export const SPACING_SCALE = [0, 2, 4, 6, 8, 10, 12, 14, 16] as const;
 
 export type SpacingScale = (typeof SPACING_SCALE)[number];
 
 const scaleMap = (prefix: string): Record<SpacingScale, string> => {
-  return Object.fromEntries(
-    SPACING_SCALE.map((step) => [step, `${prefix}-${step}`]),
-  ) as Record<SpacingScale, string>;
+  return recordFromKeys({
+    keys: SPACING_SCALE,
+    toValue: (step) => `${prefix}-${step}`,
+  });
 };
 
 export const PADDING = {
@@ -33,7 +36,6 @@ export const GAP = {
   x: scaleMap('gap-x'),
   y: scaleMap('gap-y'),
 };
-
 
 const SPACING_PROP_MAP = {
   p: PADDING.all,
@@ -68,8 +70,9 @@ export type SpacingProps = Partial<
  */
 export const spacingClasses = (props: SpacingProps): string => {
   return Object.entries(props)
-    .filter((entry): entry is [keyof typeof SPACING_PROP_MAP, SpacingScale] =>
-      entry[1] !== undefined,
+    .filter(
+      (entry): entry is [keyof typeof SPACING_PROP_MAP, SpacingScale] =>
+        entry[1] !== undefined,
     )
     .map(([key, value]) => SPACING_PROP_MAP[key][value])
     .join(' ');

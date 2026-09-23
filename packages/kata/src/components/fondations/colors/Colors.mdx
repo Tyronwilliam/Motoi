@@ -1,0 +1,95 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ColorStories from './Colors.stories';
+
+<Meta of={ColorStories} />
+
+# Color
+
+The color palette is defined once as semantic tokens (`--primary`,
+`--destructive`, ...) in `src/styles.css`, with a light and a dark value for
+each. Components must reference a token rather than a raw color value, so
+theming (including dark mode) stays centralized.
+
+The list of valid tokens is the single source of truth in
+`src/lib/colors/tokens.ts`:
+
+```ts
+export const COLOR_TOKENS = [
+  'primary',
+  'secondary',
+  'muted',
+  'accent',
+  'destructive',
+  'success',
+  'warning',
+  'info',
+] as const;
+
+export type ColorToken = (typeof COLOR_TOKENS)[number];
+```
+
+Any component exposing a color prop should type it with `ColorToken` (or a
+narrower subset via `Extract`, see `Typography` below) instead of a free
+`string`, so an unknown token is rejected at compile time.
+
+<Canvas of={ColorStories.Colors} />
+
+## Background, text, border, ring
+
+`BG`, `TEXT`, `BORDER` and `RING` (from `src/lib/colors/tokens.ts` and
+`src/lib/colors/typography.ts`) expose the Tailwind class for each token and
+each usage:
+
+```ts
+import { BG, TEXT } from '@/lib/colors';
+
+BG.primary; // "bg-primary"
+TEXT.destructive; // "text-destructive"
+```
+
+Every semantic token also has a `-foreground` counterpart for the text that
+sits on top of its background (`FOREGROUND_TEXT`), so a component never has
+to guess which text color is readable on a given background.
+
+## Status
+
+`Status` is a whitelist independent from `ColorToken`: its members
+(`info`, `success`, `warning`, `error`, `neutral`) are business-facing names
+that don't all match a token 1:1 (`error` → `destructive`, `neutral` →
+`muted`). `STATUS_COLOR_TOKEN` makes that mapping explicit, and
+`statusColorClasses` resolves a status straight to its background +
+foreground pair:
+
+```ts
+import { statusColorClasses } from '@/lib/colors';
+
+statusColorClasses('error'); // "bg-destructive text-destructive-foreground"
+```
+
+## Typography
+
+`Typography` is a text-only whitelist. Unlike `Status`, its members are
+already valid `ColorToken` names, so it's derived directly with `Extract`
+instead of going through a mapping table:
+
+```ts
+export type Typography = Extract<
+  ColorToken,
+  'primary' | 'secondary' | 'muted' | 'destructive'
+>;
+```
+
+```ts
+import { typographyClasses } from '@/lib/colors';
+
+typographyClasses('muted'); // "text-muted"
+```
+
+## Why these classes aren't detected automatically by Tailwind
+
+Like the spacing classes, color classes are built dynamically
+(`` `${prefix}-${token}` ``) instead of being written out as literals, so
+Tailwind's scanner can't detect them in source code. Every prefix/token
+combination used by the design system must be listed in the
+`@source inline(...)` directives in `styles.css` — otherwise the generated
+CSS is missing and the class has no effect at runtime.

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MARGIN, PADDING, SPACING_SCALE } from '@/lib/spacing';
+import { MARGIN, PADDING, SPACING_SCALE } from '@/lib/spacings';
 import type { SpacingType, SpacingValue } from './types';
 import { cn } from 'cn';
 
