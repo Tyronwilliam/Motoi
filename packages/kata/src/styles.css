@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@source inline("{p,px,py,pt,pr,pb,pl,m,mx,my,mt,mr,mb,ml,gap,gap-x,gap-y}-{0,2,4,6,8,10,12,14,16}");
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
