@@ -7,7 +7,12 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { args: 'all', argsIgnorePattern: '^_' },
+      ],
+    },
   },
   {
     ignores: ['**/out-tsc'],

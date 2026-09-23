@@ -10,11 +10,13 @@
       "vitest/importMeta",
       "vite/client",
       "node",
-      "vitest"
+      "vitest",
+      "@testing-library/jest-dom"
     ],
     "jsx": "react-jsx",
     "module": "esnext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "lib": ["es2022", "dom", "dom.iterable"]
   },
   "include": [
     "vite.config.ts",
